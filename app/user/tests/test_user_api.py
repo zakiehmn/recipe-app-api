@@ -20,13 +20,13 @@ def create_user(**params):
 
 
 class PublicUserApiTests(TestCase):
-    """Test thr public features of the user API."""
+    """Test the public features of the user API."""
 
     def setUp(self):
         self.client = APIClient()
 
     def test_create_user_success(self):
-        """Test create a user is successful."""
+        """Test creating a user is successful."""
         payload = {
             'email': 'test@example.com',
             'password': 'testpass123',
@@ -56,7 +56,7 @@ class PublicUserApiTests(TestCase):
         payload = {
             'email': 'test@example.com',
             'password': 'pw',
-            'name': 'Test Name'
+            'name': 'Test name'
         }
         res = self.client.post(CREATE_USER_URL, payload)
 
@@ -89,6 +89,14 @@ class PublicUserApiTests(TestCase):
         create_user(email='test@example.com', password='goodpass')
 
         payload = {'email': 'test@example.com', 'password': 'badpass'}
+        res = self.client.post(TOKEN_URL, payload)
+
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_token_email_not_found(self):
+        """Test error returned if user not found for given email."""
+        payload = {'email': 'test@example.com', 'password': 'pass123'}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
@@ -139,7 +147,7 @@ class PrivateUserApiTests(TestCase):
 
     def test_update_user_profile(self):
         """Test updating the user profile for the authenticated user."""
-        payload = {'name': 'Updated name', 'password': 'newpass123'}
+        payload = {'name': 'Updated name', 'password': 'word123'}
 
         res = self.client.patch(ME_URL, payload)
 

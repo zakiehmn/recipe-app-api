@@ -51,7 +51,6 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-
 # Translations
 *.mo
 *.pot
@@ -73,7 +72,6 @@ instance/
 docs/_build/
 
 # PyBuilder
-
 target/
 
 # Jupyter Notebook
@@ -92,8 +90,6 @@ ipython_config.py
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
-
-
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
@@ -131,5 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-
